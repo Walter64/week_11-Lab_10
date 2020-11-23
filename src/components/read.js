@@ -19,9 +19,9 @@ export class Read extends React.Component{
     // component lifecycle hook, gets called every time the component gets mounted/active in the view
     componentDidMount(){
         // make axios call to go and get data from this url, return promise and set it equal to our state
-        axios.get('http://localhost:4000/api/movies')
+        axios.get('http://localhost:4000/api/movies') 
         .then(response => { // fulfilled state
-            this.setState({movies:response.data.movies}); // movies variable
+            this.setState({ movies:response.data }); // movies variable / removed movies
         })
         .catch((error)=>{ // rejected state
             console.log(error)
