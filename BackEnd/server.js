@@ -67,8 +67,17 @@ app.get('/api/movies/:id', (req, res)=>{
     })
 })
 
+// listen for http delete method - when delete button is clicked
+// get movie id at this URL to delete
+app.delete('/api/movies/:id', (req, res)=>{
+    console.log("Delete Movie: " + req.params.id); // message to console
 
-
+    // find record and delete it in database by matching the id passed up, by interacting with data model using MovieModel
+    MovieModel.findByIdAndDelete(req.params.id, (err, data)=>{
+        // send back data, once executed
+        res.send(data);
+    })
+})
 
 
 // body of a history message being passed up to a post request - takes body, bodyparser

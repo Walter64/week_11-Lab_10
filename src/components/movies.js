@@ -16,7 +16,8 @@ export class Movies extends React.Component{
         return this.props.movies.map( (movie)=>{ // arrow function - each data item is called movie 
             
             // pass movie data item to new components to MovieItem display a movie
-            return <MovieItem movie={movie}></MovieItem>
+            // pass ReloadData method to movies children, the grandchildren of read component
+            return <MovieItem movie={movie} ReloadData={this.props.ReloadData}></MovieItem>
         })
     }
 }
