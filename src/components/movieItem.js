@@ -10,6 +10,9 @@ import Button from 'react-bootstrap/Button';
 // import axios
 import axios from 'axios';
 
+// 
+import {Link} from 'react-router-dom';
+
 export class MovieItem extends React.Component{
 
     // constructor 
@@ -49,8 +52,9 @@ export class MovieItem extends React.Component{
                         {this.props.movie.year}
                     </footer>
                     </blockquote>
-                </Card.Body>
-                <Button variant="danger" onClick={this.DeleteMovie}>Delete</Button>
+                    <Button variant="danger" onClick={this.DeleteMovie}>Delete</Button>
+                    <Link to={"edit/" + this.props.movie._id} className="btn btn-primary">Edit</Link>
+                </Card.Body>                
                 </Card>
             </div>
         );

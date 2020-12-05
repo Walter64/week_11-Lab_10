@@ -57,14 +57,27 @@ app.get('/api/movies', (req, res) => {
     })
 })
 
-// listen for get request on localhost:4000/api/movies/id, return the movie of entered id if it exists
+// listen for get request on localhost:4000/api/movies/id
 app.get('/api/movies/:id', (req, res)=>{
     console.log(req.params.id);
 
-    // find movie by its ID
+    // find document/movie by its unique id if it exists and return the data
     MovieModel.findById(req.params.id, (err, data)=>{
         res.json(data);
     })
+})
+
+// access database using unique document/movie id, and return data to client
+app.put('/api/movies/:id', (req, res)=> {
+    console.log("Update " + req.params.id); // pull id out of url
+
+    // make an asnyc call to database, find record with this id, will then update this record
+    // identify the document to be edited, using unique id passed up, object containing document/movie data
+    MovieModel.findByIdAndUpdate(req.params.id, 
+        req.body, {new:true},
+        (err, data)=> {
+            res.status(200).send(data);
+        })
 })
 
 // listen for http delete method - when delete button is clicked
@@ -93,7 +106,9 @@ app.post('/api/movies', (req, res) => {
         title: req.body.title,
         year: req.body.year,
         poster: req.body.poster
-    });
+    })
+    .then()
+    .catch();
 
     // send confirmation down to client that movie is created
     res.send('Item Added');

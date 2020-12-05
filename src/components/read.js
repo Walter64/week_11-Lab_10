@@ -56,8 +56,8 @@ export class Read extends React.Component{
             <div>                
                 <h1>This is the Read Component</h1> 
 
-                // pass ReloadData method to its child movies component,so movie component
-                // can pass it to its children the grandchildren of read component               
+                {/* pass ReloadData method to its child movies component, so movie component
+                can pass it to its children, the grandchildren of read component                */}
                 <Movies movies={this.state.movies} ReloadData={this.ReloadData}></Movies>
             </div>
         );

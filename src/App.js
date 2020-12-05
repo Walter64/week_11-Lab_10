@@ -24,6 +24,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 // imports the Create and Read classes
 import { Create } from './components/create';
 import { Read } from './components/read';
+import { Edit } from './components/edit';
 
 // App class - no need to use extends 'React.Component' just Component as Component is already imported
 class App extends Component {
@@ -47,11 +48,14 @@ class App extends Component {
             <Nav.Link href="/create">Create</Nav.Link>
           </Nav>
         </Navbar>
-        <br />        
+
+        <br />
+
         <Switch>
           <Route path='/' component={Content} exact/>
-          <Route path='/create' component={Create} exact/>
-          <Route path='/read' component={Read} exact/>
+          <Route path='/create' component={Create}></Route>
+          <Route path='/read' component={Read}></Route>
+          <Route path='/edit/:id' component={Edit}></Route>
         </Switch>
         </div>
       </Router>      
