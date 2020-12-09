@@ -1,13 +1,19 @@
 const express = require('express');
 const app = express();
-const port = 4000
+const port = 4000 // server on port 4000
 
-// require cors library
+// require cors library, while building app
+// but not need after build as both front and back ends use localhost:4000
 const cors = require('cors');
+
+// to parse body data from post request
 const bodyparser = require("body-parser");
 
 // include mongoose on server
 const mongoose = require('mongoose');
+
+// to enable app to find the build folder and sub folders and files
+const path = require('path');
 
 // we want to use cors package every time
 app.use(cors());
@@ -18,6 +24,12 @@ res.header("Access-Control-Allow-Headers",
 "Origin, X-Requested-With, Content-Type, Accept");
 next();
 });
+
+// where to find the build folder (configuration information method)
+app.use(express.static(path.join(__dirname, '../build')));
+
+// where to find the static folder (configuration information method)
+app.use('/static', express.static(path.join(__dirname, 'build//static')));
 
 // parse application, x-www-form-urlencoded
 app.use(bodyparser.urlencoded({extended: false}));
@@ -112,6 +124,12 @@ app.post('/api/movies', (req, res) => {
 
     // send confirmation down to client that movie is created
     res.send('Item Added');
+})
+
+// for all other routes, other then what has been explicitely outline above
+app.get('*', (req, res)=>{
+    // send the index.html file back
+    res.sendFile(path.join(__dirname + '/../build/index.html'));
 })
 
 app.listen(port, () => {
